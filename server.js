@@ -1,7 +1,13 @@
+//jshint esversion:6
 const express = require('express')
+
+require('dotenv').config();
+
 const mongoose = require('mongoose')
 const Product = require('./models/Productmodel')
 const app = express()
+
+
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
@@ -82,7 +88,7 @@ app.delete('/products/:id', async(req, res) => {
     }
 }) 
 
-mongoose.connect('mongodb+srv://admin:qwerty1234@restfulapi.lo9425h.mongodb.net/RestfulAPI?retryWrites=true&w=majority')
+mongoose.connect(process.env.MONGO)
 .then(() => {
     console.log('connected to mongo db');
     app.listen(3000, ()=>{
